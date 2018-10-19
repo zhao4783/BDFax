@@ -123,6 +123,7 @@
 		A34260AA20BEF544004C6132 /* dither.c in Sources */ = {isa = PBXBuildFile; fileRef = A34260A820BEF544004C6132 /* dither.c */; };
 		A34260AD20BF2D06004C6132 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A34260AC20BF2D06004C6132 /* ContactsViewController.m */; };
 		A34260AF20C1D33D004C6132 /* Sftfax.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A34260AE20C1D33D004C6132 /* Sftfax.jpg */; };
+		A3AFA479217A7D610067851C /* ObjectiveDropboxOfficial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AFA478217A7D610067851C /* ObjectiveDropboxOfficial.framework */; };
 		A3BB389B21761C750026EB3A /* ContactVO.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB389A21761C750026EB3A /* ContactVO.m */; };
 		A3BB389E217625810026EB3A /* GetContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB389D217625810026EB3A /* GetContacts.m */; };
 		A3BB38A121777DB80026EB3A /* AddContact.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB389F21777DB80026EB3A /* AddContact.m */; };
@@ -130,8 +131,6 @@
 		A3C5DDA4210F3AEA0017B8DD /* Agreement.txt in Resources */ = {isa = PBXBuildFile; fileRef = A3C5DDA3210F3AEA0017B8DD /* Agreement.txt */; };
 		A3C5DDAC2110C0900017B8DD /* Annotation.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C5DDAB2110C0900017B8DD /* Annotation.png */; };
 		A3E8F41820CF1F4200A23AC9 /* Scale.png in Resources */ = {isa = PBXBuildFile; fileRef = A3E8F41720CF1F4100A23AC9 /* Scale.png */; };
-		A3F0E54720C5DB3A008D6B18 /* ObjectiveDropboxOfficial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3F0E54620C5DB3A008D6B18 /* ObjectiveDropboxOfficial.framework */; };
-		A3F0E54820C5DB3A008D6B18 /* ObjectiveDropboxOfficial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A3F0E54620C5DB3A008D6B18 /* ObjectiveDropboxOfficial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A3F0E54B20C6C238008D6B18 /* Save.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F0E54A20C6C238008D6B18 /* Save.png */; };
 		A3F0E55520C6DAF9008D6B18 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F0E55420C6DAF9008D6B18 /* ShareViewController.m */; };
 		A3F0E55820C6DAF9008D6B18 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3F0E55620C6DAF9008D6B18 /* MainInterface.storyboard */; };
@@ -163,7 +162,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				A3F0E54820C5DB3A008D6B18 /* ObjectiveDropboxOfficial.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -375,6 +373,7 @@
 		A34260AB20BF2D06004C6132 /* ContactsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ContactsViewController.h; sourceTree = "<group>"; };
 		A34260AC20BF2D06004C6132 /* ContactsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ContactsViewController.m; sourceTree = "<group>"; };
 		A34260AE20C1D33D004C6132 /* Sftfax.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Sftfax.jpg; sourceTree = "<group>"; };
+		A3AFA478217A7D610067851C /* ObjectiveDropboxOfficial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ObjectiveDropboxOfficial.framework; sourceTree = "<group>"; };
 		A3BB389921761C740026EB3A /* ContactVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactVO.h; sourceTree = "<group>"; };
 		A3BB389A21761C750026EB3A /* ContactVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactVO.m; sourceTree = "<group>"; };
 		A3BB389C217625810026EB3A /* GetContacts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GetContacts.h; sourceTree = "<group>"; };
@@ -386,7 +385,6 @@
 		A3C5DDA3210F3AEA0017B8DD /* Agreement.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Agreement.txt; path = Redmaple/Agreement.txt; sourceTree = SOURCE_ROOT; };
 		A3C5DDAB2110C0900017B8DD /* Annotation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Annotation.png; sourceTree = "<group>"; };
 		A3E8F41720CF1F4100A23AC9 /* Scale.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Scale.png; sourceTree = "<group>"; };
-		A3F0E54620C5DB3A008D6B18 /* ObjectiveDropboxOfficial.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectiveDropboxOfficial.framework; path = Carthage/Build/iOS/ObjectiveDropboxOfficial.framework; sourceTree = "<group>"; };
 		A3F0E54A20C6C238008D6B18 /* Save.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Save.png; sourceTree = "<group>"; };
 		A3F0E54C20C6DA0D008D6B18 /* Redmaple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Redmaple.entitlements; sourceTree = "<group>"; };
 		A3F0E55120C6DAF9008D6B18 /* ShareExt.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ShareExt.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -411,11 +409,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3AFA479217A7D610067851C /* ObjectiveDropboxOfficial.framework in Frameworks */,
 				A3209544207FA5DF003CB5A6 /* MobileCoreServices.framework in Frameworks */,
 				A3209557207FA6B6003CB5A6 /* CoreGraphics.framework in Frameworks */,
 				A34260A620BEF4CB004C6132 /* libtiff.a in Frameworks */,
 				A3209558207FA6B6003CB5A6 /* Foundation.framework in Frameworks */,
-				A3F0E54720C5DB3A008D6B18 /* ObjectiveDropboxOfficial.framework in Frameworks */,
 				A320954D207FA68B003CB5A6 /* ImageIO.framework in Frameworks */,
 				A320954E207FA68B003CB5A6 /* SystemConfiguration.framework in Frameworks */,
 				A320954F207FA68B003CB5A6 /* Security.framework in Frameworks */,
@@ -746,7 +744,7 @@
 		A320949C207EB877003CB5A6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A3F0E54620C5DB3A008D6B18 /* ObjectiveDropboxOfficial.framework */,
+				A3AFA478217A7D610067851C /* ObjectiveDropboxOfficial.framework */,
 				A3209555207FA6B5003CB5A6 /* CoreGraphics.framework */,
 				A3209556207FA6B5003CB5A6 /* Foundation.framework */,
 				A320954A207FA68A003CB5A6 /* AddressBook.framework */,
@@ -947,7 +945,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ObjectiveDropboxOfficial.framework",
+				"$(SRCROOT)/ObjectiveDropboxOfficial.framework",
 			);
 			outputPaths = (
 			);
@@ -1208,8 +1206,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Redmaple",
-					"$(PROJECT_DIR)/Redmaple/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Redmaple/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1235,8 +1232,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Redmaple",
-					"$(PROJECT_DIR)/Redmaple/Carthage/Build/iOS",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Redmaple/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
