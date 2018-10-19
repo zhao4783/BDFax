@@ -6,7 +6,9 @@
 //  Copyright © 2018 Xiuwei Zhao. All rights reserved.
 //
 
+#import <ObjectiveDropboxOfficial/ObjectiveDropboxOfficial.h>
 #import "AppDelegate.h"
+#import "PageViewController.h"
 
 @interface AppDelegate ()
 
@@ -14,12 +16,51 @@
 
 @implementation AppDelegate
 
+NSURL *urlSaved = nil;
+DBOAuthResult *authResult = nil;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    [self.window makeKeyAndVisible];
+    
+    UIUserNotificationType types = UIUserNotificationTypeSound | UIUserNotificationTypeBadge | UIUserNotificationTypeAlert;
+    UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+
+    NSString *appKey = @"0szvwdhzxwqivqu";
+    NSString *registeredUrlToHandle = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleURLTypes"][0][@"CFBundleURLSchemes"][0];
+    if (!appKey || [registeredUrlToHandle containsString:@"<"]) {
+        NSString *message = @"You need to set `appKey` variable in `AppDelegate.m`, as well as add to `Info.plist`.";
+        NSLog(@"%@", message);
+        NSLog(@"Terminating...");
+        exit(1);
+    }
+    [DBClientsManager setupWithAppKey:appKey];
+    
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+    authResult = [DBClientsManager handleRedirectURL:url];
+    if (authResult != nil) {
+        if ([authResult isSuccess]) {
+            NSLog(@"Success! User is logged into Dropbox.");
+            [sendPage setDropboxWindow:nil];
+        } else if ([authResult isCancel]) {
+            NSLog(@"Authorization flow was manually canceled by user!");
+        } else if ([authResult isError]) {
+            NSLog(@"Error: %@", authResult);
+        }
+    }
+    else
+    {
+        [viewerPage LaunchSendDlgWithURL:url];
+    }
+    
+    return NO;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
