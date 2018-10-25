@@ -193,6 +193,10 @@ BOOL bScrollToBottom = NO;
     {
         [self addCoverpageForAttachment];
     }
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setContacts];
+    });
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -772,6 +776,7 @@ BOOL bScrollToBottom = NO;
 
 - (void)showContacts
 {
+    matchedContactsTable.hidden = YES;
     NSString *str = recipient.text;
     if( ![str isEqualToString:@""] )
     {
@@ -2528,8 +2533,8 @@ UIBarButtonItem *cancel = nil;
         
         if( nWebService == WEB_SERVICE_SFT )
         {
-            NSString *filename = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"mytiff-%d.tif", i]];
-            if( [self saveTifFileWithMultiPages:attachmentArray images:NO filename:filename] )
+            NSString *filename = [self saveAttachmentFile:i isPDF:NO];
+            if( ![filename isEqualToString:@""] )
             {
                 NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:properties];
                 [dict removeObjectForKey:@"Attachments"];
@@ -2639,6 +2644,24 @@ UIBarButtonItem *cancel = nil;
         [self cleanSendFaxPage];
     
     return YES;
+}
+
+- (NSString *)saveAttachmentFile:(int)index isPDF:(BOOL)bPDF
+{
+    NSString *ret = @"";
+    if( bPDF )
+    {
+        NSString *filename = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"mypdf-%d.pdf", index]];
+        if( [viewerPage MyCreatePDFFile:filename list:attachmentArray isPrint:YES] )
+            ret = filename;
+    }
+    else
+    {
+        NSString *filename = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"mytiff-%d.tif", index]];
+        if( [self saveTifFileWithMultiPages:attachmentArray images:NO filename:filename] )
+            ret = filename;
+    }
+    return ret;
 }
 
 - (void)sendSftFaxProc:(NSTimer *)timer

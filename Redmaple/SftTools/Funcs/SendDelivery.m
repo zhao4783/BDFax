@@ -169,7 +169,10 @@ UploadByChunks *ubc;
     if( recipientIndex >= 0 )
     {
         NSNumber *pages = [delvPackage valueForKey:@"CountOfPages"];
-        NSString *cmd = [NSString stringWithFormat:@"{\"noTranslating\": \"true\", \"pageCount\": \"%d\",\"extension\": \"tif\"}", pages.intValue];
+        NSArray *arr = [delvPackage valueForKey:@"Attachments"];
+        NSString *filename = [arr objectAtIndex:0];
+        NSArray *arr2 = [filename componentsSeparatedByString:@"."];
+        NSString *cmd = [NSString stringWithFormat:@"{\"noTranslating\": \"true\", \"pageCount\": \"%d\",\"extension\": \"%@\"}", pages.intValue, [arr2 objectAtIndex:1]];
         [request setPostValue:cmd forKey:@"translationSettings"];
     }
     [request setTimeOutSeconds:3*60];

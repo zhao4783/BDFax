@@ -620,7 +620,7 @@ NSInteger fileFormat = 0;
     
     NSString *pdfFile = [NSTemporaryDirectory() stringByAppendingPathComponent:@"temPDF.pdf"];
     [[NSFileManager defaultManager] removeItemAtPath:pdfFile error:nil];
-    if( [self MyCreatePDFFile:pdfFile isPrint:YES] )
+    if( [self MyCreatePDFFile:pdfFile list:pageList isPrint:YES] )
     {
         pic.showsPageRange = YES;
         pic.printingItem = [NSURL fileURLWithPath:pdfFile];
@@ -638,7 +638,7 @@ NSInteger fileFormat = 0;
     }
 }
 
-- (bool)MyCreatePDFFile:(NSString *)filename isPrint:(BOOL)bPrint
+- (bool)MyCreatePDFFile:(NSString *)filename list:(NSArray *)list isPrint:(BOOL)bPrint
 {
     CGContextRef pdfContext;
     CFStringRef path;
@@ -661,13 +661,22 @@ NSInteger fileFormat = 0;
     pageDictionary = CFDictionaryCreateMutable(NULL, 0,
                                                &kCFTypeDictionaryKeyCallBacks,
                                                &kCFTypeDictionaryValueCallBacks);
-    nTotalPages = [pageList count];
-    for(NSInteger i=0; i<nTotalPages; i++)
+    NSInteger pgs = [list count];
+    for(NSInteger i=0; i<pgs; i++)
     {
         @autoreleasepool
         {
-            UIImage *image = [self setImageAtPage:i];
-            image = [self MergeAnnotationsWithImage:image onPage:i];
+            UIImage *image = nil;
+            if( list == pageList )
+            {
+                UIImage *img = [self setImageAtPage:i];
+                image = [self MergeAnnotationsWithImage:img onPage:i];
+            }
+            else
+            {
+                NSString *fname = [list objectAtIndex:i];
+                image = [UIImage imageWithContentsOfFile:fname];
+            }
             CGSize size = image.size;
             if( bPrint && size.width > size.height )
             {
@@ -706,7 +715,7 @@ NSInteger fileFormat = 0;
     }
     
     openInFile = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.pdf", [self GetTimeStringFrom:[NSDate date] forFileName:YES]]];
-    if( [self MyCreatePDFFile:openInFile isPrint:NO] )
+    if( [self MyCreatePDFFile:openInFile list:pageList isPrint:NO] )
     {
         UIDocumentInteractionController *openInController = [UIDocumentInteractionController interactionControllerWithURL:[NSURL fileURLWithPath:openInFile]];
         openInController.delegate = self;

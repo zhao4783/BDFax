@@ -358,7 +358,8 @@ NSInteger nSelectedIndex = -1;
             NSString *str = nDeviceType == DEVICE_IPHONE ? [NSString stringWithFormat:@"%@,  %@", tmStr, from] : [NSString stringWithFormat:@"%@  from: %@", tmStr, from];
             cell.textLabel.text = str;
             DocumentVO *docV = [delV.getDocumentVOs objectAtIndex:0];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d-page,  %@", docV.getPageCount, subject];
+            float size = docV.getSize / (1024.0 * 1024.0);
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d-page, %0.2fMB,  %@", docV.getPageCount, size, subject];
         }
         else
         {

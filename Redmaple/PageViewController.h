@@ -23,7 +23,7 @@
 
 #define DEVICE_IPHONE   1
 #define DEVICE_IPAD     2
-#define APP_VERSION     @"5.3.1.7"
+#define APP_VERSION     @"5.3.1.8"
 
 #define SERVER_SFTFAX           @"sftfax.biscom.com"
 #define SERVER_FAXCOMANYWHERE   @"webfax.faxcomanywhere.com"
@@ -96,6 +96,7 @@
 - (void)setAnnotationBar;
 - (UIImage *)getImageForPage:(NSInteger)page;
 - (void)closeFileData;
+- (bool)MyCreatePDFFile:(NSString *)filename list:(NSArray *)list isPrint:(BOOL)bPrint;
 
 @end
 

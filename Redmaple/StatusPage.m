@@ -86,7 +86,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
     NSInteger fontSize = nDeviceType == DEVICE_IPHONE ? 15 : 18;
-    cell.textLabel.textColor = [UIColor colorWithRed:0.35 green:0.35 blue:0.35 alpha:1.0];
+    cell.detailTextLabel.textColor = [UIColor colorWithRed:0.35 green:0.35 blue:0.35 alpha:1.0];
     cell.textLabel.font = [UIFont systemFontOfSize:fontSize];
 
     if( nWebService == WEB_SERVICE_MOBILE )
@@ -119,7 +119,8 @@
             NSString *str = [NSString stringWithFormat:@"%@ to %@", tmStr, to];
             cell.textLabel.text = str;
             DocumentVO *docV = [delV.getDocumentVOs objectAtIndex:0];
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d-page,  %@", docV.getPageCount, delV.getDeliveryName];
+            float size = docV.getSize / (1024.0 * 1024.0);
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d-page, %0.2fMB,  %@", docV.getPageCount, size, delV.getDeliveryName];
         }
     }
 
