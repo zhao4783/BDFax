@@ -43,7 +43,6 @@ BOOL bOrientLandscape = NO;
 UISwitch *coverPageSwitch = nil;
 BOOL bBackToSendPage = NO;
 BOOL bAnnotationOn = NO;
-BOOL bShowThumbnail = NO;
 
 FAWebServiceMain_MessageStatus *stsAnywhere = nil;
 FAWebServiceMain_PendingMessage *ptsAnywhere = nil;
@@ -307,7 +306,7 @@ NSInteger fileFormat = 0;
         if( nPages > MAX_PAGE_COUNT )
             nPages = MAX_PAGE_COUNT;
         
-        if( bShowThumbnail )
+        if( nDeviceType == DEVICE_IPAD )
         {
             nTotalPages = nPages;
             nCurrentPageIndex = 0;
@@ -341,7 +340,7 @@ NSInteger fileFormat = 0;
         if( nPages > MAX_PAGE_COUNT )
             nPages = MAX_PAGE_COUNT;
         
-        if( bShowThumbnail )
+        if( nDeviceType == DEVICE_IPAD )
         {
             nTotalPages = nPages;
             nCurrentPageIndex = 0;

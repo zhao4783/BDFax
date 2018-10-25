@@ -187,7 +187,7 @@ extern int nWebService;
     }
     if( nWebService == WEB_SERVICE_SFT && wsSft != nil )
     {
-        return [wsSft receiveIPFaxByFaxID:faxID];
+        return [wsSft receiveIPFaxByFaxID];
     }
     return @"";
 }

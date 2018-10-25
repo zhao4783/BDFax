@@ -9,14 +9,18 @@
 #ifndef WebserviceSft_h
 #define WebserviceSft_h
 
+#import "DeliveryVO.h"
+
 @class ASIFormDataRequest;
 
 @interface WebServicesSft : NSObject
 {
     ASIFormDataRequest *request;
     bool bAccessing;
+    DeliveryVO *delV;
 }
 @property (retain, nonatomic) ASIFormDataRequest *request;
+@property (retain, nonatomic) DeliveryVO *deliveryVO;
 @property bool bAccessing;
 
 - (BOOL)login:(BOOL)inSilent;
@@ -25,7 +29,7 @@
 - (BOOL)removeStatusMessage:(UITableView *)aTableView forRowAtIndexPath:(NSIndexPath *)indexPath;
 - (void)getReceivedIPFaxes:(BOOL)silent;
 - (void)updateReceivedIPFaxes;
-- (NSString *)receiveIPFaxByFaxID:(NSString *)faxID;
+- (NSString *)receiveIPFaxByFaxID;
 - (void)removeFaxWithIndex:(NSIndexPath *)indexPath;
 - (bool)sendFax:(NSArray *)recipientSet pack:(NSDictionary *)pack index:(int)index;
 - (BOOL)canAccess;

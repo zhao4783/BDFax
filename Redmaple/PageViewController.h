@@ -139,7 +139,6 @@ extern UIBarButtonItem *savedRightButton;
 extern NSString *savedTitle;
 extern CGRect landscapeFrame;
 extern CGRect portraitFrame;
-extern BOOL bShowThumbnail;
 extern NSMutableArray *appContacts;
 
 

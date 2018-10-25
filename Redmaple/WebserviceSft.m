@@ -28,7 +28,7 @@
 #import "BDSiOSConstant.h"
 
 @implementation WebServicesSft
-@synthesize request, bAccessing;
+@synthesize request, bAccessing, deliveryVO;
 
 extern UserInfo *userInfo;
 
@@ -38,6 +38,7 @@ extern UserInfo *userInfo;
     if( self )
     {
         bAccessing = false;
+        deliveryVO = nil;
     }
     
     return self;
@@ -453,8 +454,10 @@ extern UserInfo *userInfo;
     }
 }
 
-- (NSString *)receiveIPFaxByFaxID:(NSString *)faxID
+- (NSString *)receiveIPFaxByFaxID
 {
+    DeliveryVO *delV = deliveryVO == nil ? [listOfMeta objectAtIndex:nSelectedIndex] : deliveryVO;
+    NSString* faxID = [NSString stringWithFormat:@"%d", delV.getDeliveryId];
     NSString *tempFile = [FaxFolder stringByAppendingPathComponent:faxID];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *arr = [fileManager contentsOfDirectoryAtPath:FaxFolder error:nil];
@@ -468,10 +471,8 @@ extern UserInfo *userInfo;
     }
     
     bAccessing = true;
-    NSString *filename = @"";
     @try
     {
-        DeliveryVO *delV = [listOfMeta objectAtIndex:nSelectedIndex];
         DownloadFile *rd = [[DownloadFile alloc] initWithDeliveryVO:delV filePath:tempFile];
         [rd getDataFile];
     }
@@ -481,7 +482,7 @@ extern UserInfo *userInfo;
     }
     bAccessing = false;
     
-    return filename;
+    return @"";
 }
 
 - (void)removeFaxWithIndex:(NSIndexPath *)indexPath

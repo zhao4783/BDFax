@@ -536,11 +536,7 @@ NSInteger nSelectedIndex = -1;
 
 - (void)readFaxFile:(NSString *)fileName
 {
-    if( nDeviceType == DEVICE_IPAD )
-        bShowThumbnail = YES;
     [viewerPage setPageInfoForFile:fileName];
-    bShowThumbnail = NO;
-
     if( nDeviceType == DEVICE_IPHONE )
     {
         [viewerPage showSpinner:NO];

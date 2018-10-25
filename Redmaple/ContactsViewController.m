@@ -258,7 +258,7 @@ NSString *defaultCompany = @"";
     return cell;
 }
 
-// Fixed for iPhone X
+// Fixed 
 - (void)tableView:(UITableView *)aTableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
 {
     int leftMargin = 0;

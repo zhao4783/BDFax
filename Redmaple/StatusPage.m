@@ -9,6 +9,8 @@
 #import "PageViewController.h"
 #import "StatusPage.h"
 #import "DeliveryVO.h"
+#import "DocumentVO.h"
+#import "GetDelivery.h"
 
 @interface StatusPage ()
 
@@ -22,7 +24,6 @@
     [super viewDidLoad];
     
     statusPage = self;
-    self.tableView.allowsSelection = NO;
     self.tableView.sectionHeaderHeight = 55;
     sentLogArray = [[NSMutableArray alloc] init];
     spinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
@@ -30,6 +31,10 @@
     spinner.hidden = YES;
     [self.navigationController.navigationBar addSubview:spinner];
     [self performSelector:@selector(OnRefresh:) withObject:nil afterDelay:0.2];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,7 +78,7 @@
 
 - (CGFloat)tableView:(UITableView *)aTableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 40;
+    return 45;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -83,7 +88,6 @@
     NSInteger fontSize = nDeviceType == DEVICE_IPHONE ? 15 : 18;
     cell.textLabel.textColor = [UIColor colorWithRed:0.35 green:0.35 blue:0.35 alpha:1.0];
     cell.textLabel.font = [UIFont systemFontOfSize:fontSize];
-    cell.detailTextLabel.font = [UIFont systemFontOfSize:fontSize];
 
     if( nWebService == WEB_SERVICE_MOBILE )
     {
@@ -114,11 +118,37 @@
             NSString *tmStr = [NSString stringWithFormat:@"%@ %@%@", [chunks objectAtIndex:0], [chunks objectAtIndex:1], [chunks objectAtIndex:2]];
             NSString *str = [NSString stringWithFormat:@"%@ to %@", tmStr, to];
             cell.textLabel.text = str;
-            cell.detailTextLabel.text = @"";
+            DocumentVO *docV = [delV.getDocumentVOs objectAtIndex:0];
+            cell.detailTextLabel.text = [NSString stringWithFormat:@"%d-page,  %@", docV.getPageCount, delV.getDeliveryName];
         }
     }
 
     return cell;
+}
+
+- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if( nWebService == WEB_SERVICE_SFT )
+    {
+        DeliveryVO *delV = [sentLogArray objectAtIndex:indexPath.row];
+        [viewerPage switchToView:viewerPage];
+        [viewerPage cleanScreen];
+        [viewerPage showSpinner:YES];
+        
+        [self performSelector:@selector(readFaxFile:) withObject:delV afterDelay:0];
+    }
+}
+
+- (void)readFaxFile:(DeliveryVO *)delV
+{
+    wsm.wsSft.deliveryVO = delV;
+    NSString *file = [wsm.wsSft receiveIPFaxByFaxID];
+    if( ![file isEqualToString:@""] )
+    {
+        [viewerPage setPageInfoForFile:file];
+        [viewerPage showSpinner:NO];
+    }
+    wsm.wsSft.deliveryVO = nil;
 }
 
 - (void)tableView:(UITableView *)aTableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section
