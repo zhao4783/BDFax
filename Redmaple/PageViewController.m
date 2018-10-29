@@ -666,30 +666,30 @@ NSInteger fileFormat = 0;
     {
         @autoreleasepool
         {
+            CGSize size = CGSizeZero;
             UIImage *image = nil;
             if( list == pageList )
             {
                 UIImage *img = [self setImageAtPage:i];
                 image = [self MergeAnnotationsWithImage:img onPage:i];
+                size = image.size;
+                if( bPrint && size.width > size.height )
+                {
+                    image = [self DoRotateImage:image];
+                    size = image.size;
+                }
+                CGFloat rx = size.width / 1728.0;
+                CGFloat ry = size.height / 2200.0;
+                CGFloat rr = rx > ry ? rx : ry;
+                size = CGSizeMake(size.width/rr, size.height/rr);
             }
             else
             {
                 NSString *fname = [list objectAtIndex:i];
                 image = [UIImage imageWithContentsOfFile:fname];
-            }
-            CGSize size = image.size;
-            if( bPrint && size.width > size.height )
-            {
-                image = [self DoRotateImage:image];
                 size = image.size;
             }
-            
-            //scale the image to fit A4 paper size
-            CGFloat rx = size.width / 1728.0;
-            CGFloat ry = size.height / 2200.0;
-            CGFloat rr = rx > ry ? rx : ry;
-            CGSize sz = CGSizeMake(size.width/rr, size.height/rr);
-            pageRect = CGRectMake(0, 0, sz.width*72.0/200.0, sz.height*72.0/200.0);
+            pageRect = CGRectMake(0, 0, size.width*72.0/200.0, size.height*72.0/200.0);
             
             CFDataRef boxData = CFDataCreate(NULL,(const UInt8 *)&pageRect, sizeof (CGRect));
             CFDictionarySetValue(pageDictionary, kCGPDFContextMediaBox, boxData);

@@ -2526,14 +2526,14 @@ UIBarButtonItem *cancel = nil;
                 }
                 UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
                 UIGraphicsEndImageContext();
-                NSData *imageData = UIImageJPEGRepresentation (image, 1.0);
+                NSData *imageData = UIImageJPEGRepresentation (image, 0.8);
                 [imageData writeToFile:file atomically:YES];
             }
         }
         
         if( nWebService == WEB_SERVICE_SFT )
         {
-            NSString *filename = [self saveAttachmentFile:i isPDF:NO];
+            NSString *filename = [self saveAttachmentFile:i isPDF:YES];
             if( ![filename isEqualToString:@""] )
             {
                 NSMutableDictionary *dict = [NSMutableDictionary dictionaryWithDictionary:properties];
@@ -2652,12 +2652,14 @@ UIBarButtonItem *cancel = nil;
     if( bPDF )
     {
         NSString *filename = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"mypdf-%d.pdf", index]];
+        [[NSFileManager defaultManager] removeItemAtPath:filename error:nil];
         if( [viewerPage MyCreatePDFFile:filename list:attachmentArray isPrint:YES] )
             ret = filename;
     }
     else
     {
         NSString *filename = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"mytiff-%d.tif", index]];
+        [[NSFileManager defaultManager] removeItemAtPath:filename error:nil];
         if( [self saveTifFileWithMultiPages:attachmentArray images:NO filename:filename] )
             ret = filename;
     }
