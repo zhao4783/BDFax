@@ -124,6 +124,8 @@
 		A34260AD20BF2D06004C6132 /* ContactsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A34260AC20BF2D06004C6132 /* ContactsViewController.m */; };
 		A34260AF20C1D33D004C6132 /* Sftfax.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A34260AE20C1D33D004C6132 /* Sftfax.jpg */; };
 		A3AFA479217A7D610067851C /* ObjectiveDropboxOfficial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AFA478217A7D610067851C /* ObjectiveDropboxOfficial.framework */; };
+		A3AFA480218896B00067851C /* ObjectiveDropboxOfficial.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A3AFA478217A7D610067851C /* ObjectiveDropboxOfficial.framework */; };
+		A3AFA481218896B00067851C /* ObjectiveDropboxOfficial.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A3AFA478217A7D610067851C /* ObjectiveDropboxOfficial.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A3BB389B21761C750026EB3A /* ContactVO.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB389A21761C750026EB3A /* ContactVO.m */; };
 		A3BB389E217625810026EB3A /* GetContacts.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB389D217625810026EB3A /* GetContacts.m */; };
 		A3BB38A121777DB80026EB3A /* AddContact.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BB389F21777DB80026EB3A /* AddContact.m */; };
@@ -156,12 +158,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		A3F0E54920C5DB3A008D6B18 /* Embed Frameworks */ = {
+		A3AFA482218896B00067851C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				A3AFA481218896B00067851C /* ObjectiveDropboxOfficial.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -423,6 +426,7 @@
 				A3209553207FA68B003CB5A6 /* UIKit.framework in Frameworks */,
 				A3209554207FA68B003CB5A6 /* AddressBookUI.framework in Frameworks */,
 				A320953F207FA4CC003CB5A6 /* CFNetwork.framework in Frameworks */,
+				A3AFA480218896B00067851C /* ObjectiveDropboxOfficial.framework in Frameworks */,
 				A34260A420BEF4CB004C6132 /* libMagickCore.a in Frameworks */,
 				A3209540207FA4CC003CB5A6 /* MessageUI.framework in Frameworks */,
 				A3209541207FA4CC003CB5A6 /* CoreData.framework in Frameworks */,
@@ -802,8 +806,8 @@
 				A3122234207BD91E00DCC0EA /* Frameworks */,
 				A3122235207BD91E00DCC0EA /* Resources */,
 				A342608B20BDECC9004C6132 /* ShellScript */,
-				A3F0E54920C5DB3A008D6B18 /* Embed Frameworks */,
 				A3F0E56020C6DAF9008D6B18 /* Embed App Extensions */,
+				A3AFA482218896B00067851C /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -941,15 +945,15 @@
 /* Begin PBXShellScriptBuildPhase section */
 		A342608B20BDECC9004C6132 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/ObjectiveDropboxOfficial.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjectiveDropboxOfficial.framework",
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
 		};
