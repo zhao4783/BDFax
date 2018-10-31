@@ -71,11 +71,26 @@ NSInteger nSelectedIndex = -1;
 {
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    [contentVC willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+}
+
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     int dx = self.tableView.frame.size.width;
     CGRect rect = CGRectMake(10, 10, dx - 20, nThumbnailWindowHeight);
     thumbnailView.frame = rect;
+    if( nDeviceType == DEVICE_IPAD && nThumbIndex > 0 )
+    {
+        CGSize size = [self getThumbnailSize];
+        CGRect rect = CGRectMake(0, 0, size.width, size.height);
+        for(NSInteger i=0; i<nTotalPages; i++)
+        {
+            thumbnailImageView[i].frame = rect;
+        }
+        [thumbnailView reloadData];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -567,6 +582,7 @@ NSInteger nSelectedIndex = -1;
             }
         }
         [thumbnailView reloadData];
+        nThumbIndex = 0;
     }
 }
 
@@ -672,6 +688,7 @@ NSInteger nThumbIndex = 0;
             thumbnailImageView[i] = nil;
         }
     }
+    nThumbIndex = 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -697,7 +714,8 @@ NSInteger nThumbIndex = 0;
 - (CGSize)getThumbnailSize
 {
     CGSize size;
-    if( bOrientLandscape )
+    CGRect rt = self.view.frame;
+    if( rt.size.width > rt.size.height )
     {
         if( nTotalPages == 1 ) size.width = 950;
         if( nTotalPages == 2 ) size.width = 490;

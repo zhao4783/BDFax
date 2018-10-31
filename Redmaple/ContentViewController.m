@@ -86,10 +86,24 @@ BOOL bKeepWating = NO;
 - (void)viewWillAppear:(BOOL)animated
 {
     contentVC = self;
+    CGRect rt = self.view.frame;
+    if( rt.size.width > rt.size.height )
+    {
+        if( landscapeFrame.size.width == 0 )
+            landscapeFrame = [viewerPage getScrollViewFrame];
+        savedScrollViewFrame = landscapeFrame;
+    }
+    else
+    {
+        if( portraitFrame.size.width == 0 )
+            portraitFrame = [viewerPage getScrollViewFrame];
+        savedScrollViewFrame = portraitFrame;
+    }
     scrollView.frame = savedScrollViewFrame;
+    [self setImageViewFrame];
     annotationView.annotations = annotationList;
-    [self RedrawAnnotations];
- }
+    [self adjustDisplay];
+}
 
 - (void)setImageViewFrame
 {
@@ -119,8 +133,6 @@ BOOL bKeepWating = NO;
         {
             landscapeFrame = [viewerPage getScrollViewFrame];
             savedScrollViewFrame = landscapeFrame;
-            scrollView.frame = savedScrollViewFrame;
-            [self setImageViewFrame];
         }
     }
     else
@@ -129,10 +141,15 @@ BOOL bKeepWating = NO;
         {
             portraitFrame = [viewerPage getScrollViewFrame];
             savedScrollViewFrame = portraitFrame;
-            scrollView.frame = savedScrollViewFrame;
-            [self setImageViewFrame];
         }
     }
+    scrollView.frame = savedScrollViewFrame;
+    [self setImageViewFrame];
+    [self adjustDisplay];
+}
+
+- (void)adjustDisplay
+{
     int center = savedScrollViewFrame.size.width / 2;
     spinner.frame = CGRectMake(center-20, 50, 40, 40);
 
